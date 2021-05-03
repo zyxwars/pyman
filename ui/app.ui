@@ -28,6 +28,9 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="requestUrl"/>
+       </item>
        <item row="1" column="2">
         <widget class="QComboBox" name="requestMethod">
          <item>
@@ -59,47 +62,45 @@
          </property>
         </widget>
        </item>
-       <item row="3" column="0" colspan="4">
+       <item row="2" column="0" colspan="4">
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>3</number>
          </property>
          <widget class="QWidget" name="tab">
           <attribute name="title">
            <string notr="true">Body</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_4">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_3">
+           <item row="1" column="1" colspan="5">
+            <widget class="QPlainTextEdit" name="requestBody"/>
+           </item>
+           <item row="0" column="5">
+            <widget class="QPushButton" name="addBodyButton">
              <property name="text">
-              <string>Content-Type</string>
+              <string>Add</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="QPlainTextEdit" name="requestBody"/>
-           </item>
            <item row="0" column="1">
-            <widget class="QComboBox" name="requestContentType">
-             <item>
-              <property name="text">
-               <string>application/json</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>application/x-www-form-urlencoded</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>multipart/form-data</string>
-              </property>
-             </item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Key</string>
+             </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QOpenGLWidget" name="openGLWidget"/>
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_5">
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QLineEdit" name="bodyValue"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="bodyKey"/>
            </item>
           </layout>
          </widget>
@@ -107,8 +108,35 @@
           <attribute name="title">
            <string notr="true">Headers</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
+          <layout class="QGridLayout" name="gridLayout_6">
+           <item row="0" column="4">
+            <widget class="QLineEdit" name="headersValue"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>Key</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="QPushButton" name="addHeadersButton">
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="headersKey"/>
+           </item>
+           <item row="1" column="1" colspan="5">
             <widget class="QPlainTextEdit" name="requestHeaders"/>
            </item>
           </layout>
@@ -117,16 +145,77 @@
           <attribute name="title">
            <string notr="true">Cookies</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <item>
+          <layout class="QGridLayout" name="gridLayout_7">
+           <item row="0" column="3">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="QPushButton" name="addCookiesButton">
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QLineEdit" name="cookiesValue"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLineEdit" name="cookiesKey"/>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Key</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1" colspan="5">
             <widget class="QPlainTextEdit" name="requestCookies"/>
            </item>
           </layout>
          </widget>
+         <widget class="QWidget" name="tab_10">
+          <attribute name="title">
+           <string notr="true">Arguments</string>
+          </attribute>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_3">
+             <property name="text">
+              <string>Key</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="4">
+            <widget class="QPushButton" name="addArgumentsButton">
+             <property name="text">
+              <string>Add</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLineEdit" name="argumentsKey"/>
+           </item>
+           <item row="1" column="3">
+            <widget class="QLineEdit" name="argumentsValue"/>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_4">
+             <property name="text">
+              <string>Value</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="5">
+            <widget class="QPlainTextEdit" name="requestArguments"/>
+           </item>
+          </layout>
+         </widget>
         </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="requestUrl"/>
        </item>
       </layout>
      </widget>

@@ -3,7 +3,7 @@ import sys
 import json
 import requests
 from requests.exceptions import RequestException
-
+from requests.structures import CaseInsensitiveDict
 
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
@@ -16,6 +16,8 @@ from bs4 import BeautifulSoup
 
 import utils
 
+# https://608ef5940294cd001765e06b.mockapi.io/api/users
+
 
 class MainWidget(qtw.QWidget):
     def __init__(self, *args, **kwargs):
@@ -25,46 +27,98 @@ class MainWidget(qtw.QWidget):
         self.response_web_view = QtWebEngineWidgets.QWebEngineView()
         self.responseBodyWebLayout.addWidget(self.response_web_view)
 
-        self.reset_request()
-
         # Signals
         self.sendButton.clicked.connect(self.send)
+
+        self.addBodyButton.clicked.connect(self.add_body_item)
+        self.addHeadersButton.clicked.connect(self.add_headers_item)
+        self.addCookiesButton.clicked.connect(self.add_cookies_item)
+        self.addArgumentsButton.clicked.connect(self.add_arguments_item)
+
+    def add_body_item(self):
+        key = self.bodyKey.text()
+        value = self.bodyValue.text()
+        current_json = self.requestBody.toPlainText()
+        self.requestBody.setPlainText(
+            utils.add_item_to_json(current_json, key, value))
+
+    def add_headers_item(self):
+        key = self.headersKey.text()
+        value = self.headersValue.text()
+        current_json = self.requestHeaders.toPlainText()
+        self.requestHeaders.setPlainText(
+            utils.add_item_to_json(current_json, key, value))
+
+    def add_cookies_item(self):
+        key = self.cookiesKey.text()
+        value = self.cookiesValue.text()
+        current_json = self.requestCookies.toPlainText()
+        self.requestCookies.setPlainText(
+            utils.add_item_to_json(current_json, key, value))
+
+    def add_arguments_item(self):
+        key = self.argumentsKey.text()
+        value = self.argumentsValue.text()
+        current_json = self.requestArguments.toPlainText()
+        self.requestArguments.setPlainText(
+            utils.add_item_to_json(current_json, key, value))
+
+        url = self.requestUrl.text()
+        try:
+            url = url[:url.rindex('/')]
+        except ValueError:
+            pass
+
+        params = utils.json_to_python(self.requestArguments.toPlainText())
+        params_list = []
+        for key, value in params.items():
+            params_list.append(f'{key}={value}')
+
+        self.requestUrl.setText(f'{url}/?{"&".join(params_list)}')
 
     def reset_request(self):
         self.requestBody.setPlainText('')
         self.requestHeaders.setPlainText('')
+        self.requestCookies.setPlainText('')
+        self.requestArguments.setPlainText('')
 
-    def parse_body(self):
+    def parse_request(self):
         body = self.requestBody.toPlainText()
-        if not utils.is_json(body):
-            return {}
-        return utils.json_string_to_python(body)
+        body = utils.json_to_python(body)
 
-    def parse_headers(self):
         headers = self.requestHeaders.toPlainText()
         if not utils.is_json(headers):
-            return {}
-        return utils.json_string_to_python(headers)
+            # Show default headers in the requestHeaders field
+            self.requestHeaders.setPlainText(utils.python_to_json(
+                dict(requests.Session().headers)))
+        headers = utils.json_to_python(headers)
 
-    def parse_cookies(self):
-        pass
+        cookies = self.requestCookies.toPlainText()
+        cookies = utils.json_to_python(cookies)
+
+        params = self.requestArguments.toPlainText()
+        params = utils.json_to_python(params)
+
+        return body, headers, cookies, params
 
     def send(self):
         method = self.requestMethod.currentText()
         url = self.requestUrl.text()
+        body, headers, cookies, params = self.parse_request()
 
-        if method == "GET":
-            r = requests.get(url, json=self.parse_body(),
-                             headers=self.parse_headers())
-        elif method == "POST":
-            r = requests.post(url, json=self.parse_body(),
-                              headers=self.parse_headers())
+        if method == "POST":
+            r = requests.post(url, json=body, headers=headers,
+                              cookies=cookies, params=params)
         elif method == "PUT":
-            r = requests.put(url, json=self.parse_body(),
-                             headers=self.parse_headers())
+            r = requests.put(url, json=body, headers=headers,
+                             cookies=cookies, params=params)
         elif method == "DELETE":
-            r = requests.delete(url, json=self.parse_body(),
-                                headers=self.parse_headers())
+            r = requests.delete(url, json=body, headers=headers,
+                                cookies=cookies, params=params)
+        # Catch impossible errors
+        else:
+            r = requests.get(url, json=body, headers=headers,
+                             cookies=cookies, params=params)
 
         self.responseStatus.setText(f'Status: {r.status_code}')
         self.responseTime.setText(
@@ -74,7 +128,7 @@ class MainWidget(qtw.QWidget):
         # Format html or json body
         if re.match(r'^{.*}$|^\[.*\]$', r.text):
             self.responseBodyPretty.setPlainText(
-                utils.format_json_string(r.text))
+                utils.format_json(r.text))
         else:
             response_html = BeautifulSoup(r.text, 'html.parser')
             self.responseBodyPretty.setPlainText(response_html.prettify())
@@ -84,9 +138,9 @@ class MainWidget(qtw.QWidget):
 
         # headers and cookies return Case insensitive dict
         self.responseHeaders.setPlainText(
-            json.dumps(dict(r.headers), indent=4))
+            utils.python_to_json(dict(r.headers)))
         self.responseCookies.setPlainText(
-            json.dumps(dict(r.cookies), indent=4))
+            utils.python_to_json(dict(r.cookies)))
 
 
 if __name__ == '__main__':
