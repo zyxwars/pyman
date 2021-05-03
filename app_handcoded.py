@@ -11,7 +11,7 @@ from PyQt5 import uic
 import utils
 
 
-class PostWidget(qtw.QWidget):
+class MainWidget(qtw.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi()
@@ -69,7 +69,7 @@ class PostWidget(qtw.QWidget):
 if __name__ == '__main__':
     app = qtw.QApplication([])
 
-    w = PostWidget()
+    w = MainWidget()
     w.show()
 
     app.exec_()

@@ -76,6 +76,9 @@
              </property>
             </widget>
            </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QPlainTextEdit" name="requestBody"/>
+           </item>
            <item row="0" column="1">
             <widget class="QComboBox" name="requestContentType">
              <item>
@@ -95,8 +98,8 @@
              </item>
             </widget>
            </item>
-           <item row="1" column="0" colspan="2">
-            <widget class="QPlainTextEdit" name="requestBody"/>
+           <item row="1" column="0">
+            <widget class="QOpenGLWidget" name="openGLWidget"/>
            </item>
           </layout>
          </widget>
@@ -129,10 +132,17 @@
      </widget>
      <widget class="QWidget" name="widget_2" native="true">
       <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Response</string>
+         </property>
+        </widget>
+       </item>
        <item row="1" column="0">
         <widget class="QTabWidget" name="tabWidget_2">
          <property name="currentIndex">
-          <number>2</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_4">
           <attribute name="title">
@@ -140,7 +150,37 @@
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
-            <widget class="QPlainTextEdit" name="responseBody"/>
+            <widget class="QTabWidget" name="tabWidget_3">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab_7">
+              <attribute name="title">
+               <string notr="true">Pretty</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="verticalLayout">
+               <item>
+                <widget class="QPlainTextEdit" name="responseBodyPretty"/>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_8">
+              <attribute name="title">
+               <string notr="true">Raw</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QPlainTextEdit" name="responseBodyRaw"/>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_9">
+              <attribute name="title">
+               <string notr="true">Web view</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="responseBodyWebLayout"/>
+             </widget>
+            </widget>
            </item>
           </layout>
          </widget>
@@ -164,13 +204,6 @@
            </item>
           </layout>
          </widget>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Response</string>
-         </property>
         </widget>
        </item>
       </layout>

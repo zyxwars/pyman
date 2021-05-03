@@ -8,7 +8,10 @@ from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
 from PyQt5 import QtGui as qtg
 from PyQt5 import QtMultimedia as qtm
+from PyQt5 import QtWebEngineWidgets
 from PyQt5 import uic
+from PyQt5 import QtWebEngineWidgets
+from bs4 import BeautifulSoup
 
 import utils
 
@@ -17,20 +20,14 @@ class MainWidget(qtw.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         uic.loadUi('./ui/app.ui', self)
+        # Web view not available in qt designer
+        self.response_web_view = QtWebEngineWidgets.QWebEngineView()
+        self.responseBodyWebLayout.addWidget(self.response_web_view)
 
         self.reset_request()
 
         # Signals
         self.sendButton.clicked.connect(self.send)
-        self.requestContentType.currentTextChanged.connect(
-            self.add_content_type_header)
-
-    @qtc.pyqtSlot(str)
-    def add_content_type_header(self, content_type):
-        request_headers = self.requestHeaders.toPlainText()
-        headers = utils.json_string_to_python(request_headers)
-        headers['content-type'] = content_type
-        self.requestHeaders.setPlainText(json.dumps(headers, indent=4))
 
     def reset_request(self):
         self.requestBody.setPlainText('')
@@ -64,7 +61,17 @@ class MainWidget(qtw.QWidget):
             r = requests.delete(url, json=self.parse_body(),
                                 headers=self.parse_headers())
 
-        self.responseBody.setPlainText(r.text)
+        # Format html or json body
+        if r.text.startswith('{'):
+            self.responseBodyPretty.setPlainText(
+                utils.format_json_string(r.text))
+        else:
+            response_html = BeautifulSoup(r.text, 'html.parser')
+            self.responseBodyPretty.setPlainText(response_html.prettify())
+
+        self.responseBodyRaw.setPlainText(r.text)
+        self.response_web_view.setHtml(r.text)
+
         # headers and cookies return Case insensitive dict
         self.responseHeaders.setPlainText(
             json.dumps(dict(r.headers), indent=4))
