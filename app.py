@@ -1,3 +1,4 @@
+import re
 import sys
 import json
 import requests
@@ -35,10 +36,14 @@ class MainWidget(qtw.QWidget):
 
     def parse_body(self):
         body = self.requestBody.toPlainText()
+        if not utils.is_json(body):
+            return {}
         return utils.json_string_to_python(body)
 
     def parse_headers(self):
         headers = self.requestHeaders.toPlainText()
+        if not utils.is_json(headers):
+            return {}
         return utils.json_string_to_python(headers)
 
     def parse_cookies(self):
@@ -61,8 +66,13 @@ class MainWidget(qtw.QWidget):
             r = requests.delete(url, json=self.parse_body(),
                                 headers=self.parse_headers())
 
+        self.responseStatus.setText(f'Status: {r.status_code}')
+        self.responseTime.setText(
+            f'Time: {r.elapsed.total_seconds() * 1000:.0f} ms')
+        self.responseSize.setText(f'Size: {len(r.content) / 1024:.2f} kB')
+
         # Format html or json body
-        if r.text.startswith('{'):
+        if re.match(r'^{.*}$|^\[.*\]$', r.text):
             self.responseBodyPretty.setPlainText(
                 utils.format_json_string(r.text))
         else:
