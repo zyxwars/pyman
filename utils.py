@@ -4,6 +4,14 @@ import json
 from requests.structures import CaseInsensitiveDict
 
 
+def load_stylesheet(path):
+    stylesheet = ''
+    with open(path, 'r', encoding='utf-8') as f:
+        for line in f:
+            stylesheet += line
+    return stylesheet
+
+
 def json_to_python(json_string: str):
     """If conversion fails, return empty dict."""
     try:

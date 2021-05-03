@@ -1,0 +1,90 @@
+* {
+  background-color: rgb(25, 30, 39);
+  font-family: "Roboto";
+  border: none;
+  font-size: 15px;
+}
+
+QPushButton {
+  padding: 0 30px;
+  height: 40px;
+
+  background-color: rgb(241, 168, 72);
+  color: white;
+}
+
+QComboBox {
+  padding: 10px;
+
+  background-color: rgb(43, 50, 65);
+  color: white;
+}
+
+QComboBox QAbstractItemView {
+  background-color: rgb(241, 168, 72);
+  color: white;
+  selection-background-color: rgb(43, 50, 65);
+}
+
+QLineEdit {
+  padding: 0 5px;
+  height: 40px;
+  background-color: rgb(43, 50, 65);
+  color: white;
+}
+
+QPlainTextEdit {
+  background-color: rgb(43, 50, 65);
+  color: white;
+}
+
+QLabel {
+  color: white;
+  background-color: none;
+}
+
+/* QTabBar Stuff */
+QTabBar::tab {
+  background-color: rgb(43, 50, 65);
+  color: white;
+  font-size: 12px;
+}
+
+QTabBar::tab:selected {
+  background-color: rgb(36, 42, 54);
+}
+
+#tab,
+#tab_2,
+#tab_3,
+#tab_4,
+#tab_5,
+#tab_6,
+#tab_7,
+#tab_8,
+#tab_9,
+#tab_10,
+#tab_11,
+#tab_12,
+#tab_13,
+#tab_14,
+#tab_15 {
+  background-color: rgb(36, 42, 54);
+}
+
+/* Remove borders */
+QTabBar {
+  border: 0px solid white;
+}
+
+QTabWidget {
+  border: 0px solid green !important;
+}
+
+QTabWidget::tab-bar {
+  border: 0px solid rgb(255, 153, 0) !important;
+}
+
+QTabWidget::pane {
+  border: 0px solid yellow !important;
+}

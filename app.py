@@ -16,13 +16,14 @@ from bs4 import BeautifulSoup
 
 import utils
 
-# https://608ef5940294cd001765e06b.mockapi.io/api/users
-
 
 class MainWidget(qtw.QWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         uic.loadUi('./ui/app.ui', self)
+        self.setStyleSheet(utils.load_stylesheet('./styles/style.css'))
+        self.setWindowTitle('Pyman')
+
         # Web view not available in qt designer
         self.response_web_view = QtWebEngineWidgets.QWebEngineView()
         self.responseBodyWebLayout.addWidget(self.response_web_view)
@@ -33,7 +34,7 @@ class MainWidget(qtw.QWidget):
         self.addBodyButton.clicked.connect(self.add_body_item)
         self.addHeadersButton.clicked.connect(self.add_headers_item)
         self.addCookiesButton.clicked.connect(self.add_cookies_item)
-        self.addArgumentsButton.clicked.connect(self.add_arguments_item)
+        self.addParametersButton.clicked.connect(self.add_parameters_item)
 
     def add_body_item(self):
         key = self.bodyKey.text()
@@ -56,11 +57,11 @@ class MainWidget(qtw.QWidget):
         self.requestCookies.setPlainText(
             utils.add_item_to_json(current_json, key, value))
 
-    def add_arguments_item(self):
-        key = self.argumentsKey.text()
-        value = self.argumentsValue.text()
-        current_json = self.requestArguments.toPlainText()
-        self.requestArguments.setPlainText(
+    def add_parameters_item(self):
+        key = self.parametersKey.text()
+        value = self.parametersValue.text()
+        current_json = self.requestParameters.toPlainText()
+        self.requestParameters.setPlainText(
             utils.add_item_to_json(current_json, key, value))
 
         url = self.requestUrl.text()
@@ -69,7 +70,7 @@ class MainWidget(qtw.QWidget):
         except ValueError:
             pass
 
-        params = utils.json_to_python(self.requestArguments.toPlainText())
+        params = utils.json_to_python(self.requestParameters.toPlainText())
         params_list = []
         for key, value in params.items():
             params_list.append(f'{key}={value}')
@@ -80,7 +81,7 @@ class MainWidget(qtw.QWidget):
         self.requestBody.setPlainText('')
         self.requestHeaders.setPlainText('')
         self.requestCookies.setPlainText('')
-        self.requestArguments.setPlainText('')
+        self.requestParameters.setPlainText('')
 
     def parse_request(self):
         body = self.requestBody.toPlainText()
@@ -96,7 +97,7 @@ class MainWidget(qtw.QWidget):
         cookies = self.requestCookies.toPlainText()
         cookies = utils.json_to_python(cookies)
 
-        params = self.requestArguments.toPlainText()
+        params = self.requestParameters.toPlainText()
         params = utils.json_to_python(params)
 
         return body, headers, cookies, params
