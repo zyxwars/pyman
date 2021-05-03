@@ -272,6 +272,18 @@
                <string notr="true">Pretty</string>
               </attribute>
               <layout class="QVBoxLayout" name="verticalLayout">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
                 <widget class="QPlainTextEdit" name="responseBodyPretty"/>
                </item>
@@ -282,6 +294,18 @@
                <string notr="true">Raw</string>
               </attribute>
               <layout class="QVBoxLayout" name="verticalLayout_4">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
                <item>
                 <widget class="QPlainTextEdit" name="responseBodyRaw"/>
                </item>
@@ -291,7 +315,20 @@
               <attribute name="title">
                <string notr="true">Web view</string>
               </attribute>
-              <layout class="QVBoxLayout" name="responseBodyWebLayout"/>
+              <layout class="QVBoxLayout" name="responseBodyWebLayout">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+              </layout>
              </widget>
             </widget>
            </item>

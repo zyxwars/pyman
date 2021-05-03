@@ -3,6 +3,7 @@
   font-family: "Roboto";
   border: none;
   font-size: 15px;
+  outline: 0;
 }
 
 QPushButton {
@@ -13,6 +14,42 @@ QPushButton {
   color: white;
 }
 
+#requestBody,
+#requestHeaders,
+#requestCookies,
+#requestParameters {
+  margin-top: 5px;
+}
+
+QScrollBar:vertical {
+  border: none;
+  background-color: rgb(25, 30, 39);
+  width: 15px;
+  margin: 22px 0 22px 0;
+}
+QScrollBar::handle:vertical {
+  background: rgb(36, 42, 54);
+  min-height: 20px;
+}
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+  width: 0px;
+  height: 0px;
+}
+
+QScrollBar::up-arrow:vertical,
+QScrollBar::down-arrow:vertical {
+  border: none;
+  width: 0px;
+  height: 0px;
+  background: white;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+  background: none;
+}
+
 QComboBox {
   padding: 10px;
 
@@ -21,9 +58,21 @@ QComboBox {
 }
 
 QComboBox QAbstractItemView {
-  background-color: rgb(241, 168, 72);
+  background-color: rgb(25, 30, 39);
   color: white;
-  selection-background-color: rgb(43, 50, 65);
+  selection-background-color: rgb(241, 168, 72);
+}
+
+QComboBox::drop-down {
+  border: none;
+  background-color: rgb(43, 50, 65);
+}
+
+QComboBox::down-arrow {
+  width: 10px;
+  height: 10px;
+  padding-right: 10px;
+  image: url(./ui/down-arrow.png);
 }
 
 QLineEdit {
@@ -72,19 +121,9 @@ QTabBar::tab:selected {
   background-color: rgb(36, 42, 54);
 }
 
-/* Remove borders */
+QTabWidget::pane,
+QTabWidget::tab-bar,
+QTabWidget,
 QTabBar {
-  border: 0px solid white;
-}
-
-QTabWidget {
-  border: 0px solid green !important;
-}
-
-QTabWidget::tab-bar {
-  border: 0px solid rgb(255, 153, 0) !important;
-}
-
-QTabWidget::pane {
-  border: 0px solid yellow !important;
+  border: none;
 }
