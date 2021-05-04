@@ -25,28 +25,20 @@ QScrollBar:vertical {
   border: none;
   background-color: rgb(25, 30, 39);
   width: 15px;
-  margin: 22px 0 22px 0;
 }
+
 QScrollBar::handle:vertical {
   background: rgb(36, 42, 54);
-  min-height: 20px;
-}
-QScrollBar::add-line:vertical,
-QScrollBar::sub-line:vertical {
-  width: 0px;
-  height: 0px;
+  padding: 10px 0;
 }
 
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical,
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical,
 QScrollBar::up-arrow:vertical,
 QScrollBar::down-arrow:vertical {
-  border: none;
-  width: 0px;
   height: 0px;
-  background: white;
-}
-
-QScrollBar::add-page:vertical,
-QScrollBar::sub-page:vertical {
   background: none;
 }
 
