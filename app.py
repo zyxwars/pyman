@@ -11,7 +11,6 @@ from PyQt5 import QtGui as qtg
 from PyQt5 import QtMultimedia as qtm
 from PyQt5 import QtWebEngineWidgets
 from PyQt5 import uic
-from PyQt5 import QtWebEngineWidgets
 from bs4 import BeautifulSoup
 
 import utils
@@ -137,7 +136,7 @@ class MainWidget(qtw.QWidget):
 
     def request(self, method, url, body, headers, cookies, params):
         if not re.match(r'^https?:\/\/', url):
-            url = f'{self.requestProtocol.currentText().lower()}://{url}'
+            url = f'{self.requestScheme.currentText().lower()}://{url}'
 
         try:
             if method == "POST":

@@ -63,6 +63,9 @@
            </item>
            <item row="0" column="4">
             <widget class="QPushButton" name="addBodyButton">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>Add</string>
              </property>
@@ -107,6 +110,9 @@
            </item>
            <item row="0" column="4">
             <widget class="QPushButton" name="addHeadersButton">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>Add</string>
              </property>
@@ -124,6 +130,9 @@
            </item>
            <item row="0" column="4">
             <widget class="QPushButton" name="addCookiesButton">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>Add</string>
              </property>
@@ -175,6 +184,9 @@
            </item>
            <item row="0" column="4">
             <widget class="QPushButton" name="addParametersButton">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically add parameter to the url&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="text">
               <string>Add</string>
              </property>
@@ -209,7 +221,10 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QComboBox" name="requestProtocol">
+        <widget class="QComboBox" name="requestScheme">
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use this scheme, if one is not found in the url&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
          <item>
           <property name="text">
            <string>HTTPS</string>
@@ -266,6 +281,9 @@
           <layout class="QVBoxLayout" name="verticalLayout_5">
            <item>
             <widget class="QTabWidget" name="tabWidget_3">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Render website with QtWebEngine&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
              <property name="currentIndex">
               <number>0</number>
              </property>
