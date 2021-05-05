@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>925</width>
-    <height>649</height>
+    <width>818</width>
+    <height>670</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,347 +18,371 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <widget class="QSplitter" name="splitter">
+    <widget class="QSplitter" name="splitter_2">
      <property name="orientation">
-      <enum>Qt::Vertical</enum>
+      <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="widget" native="true">
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="1" column="2">
-        <widget class="QLineEdit" name="requestUrl"/>
-       </item>
-       <item row="1" column="4">
-        <widget class="QPushButton" name="sendButton">
-         <property name="text">
-          <string>SEND</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Request</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0" colspan="5">
-        <widget class="QTabWidget" name="tabWidget">
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="tab">
-          <attribute name="title">
-           <string notr="true">Body</string>
-          </attribute>
-          <layout class="QGridLayout" name="requestBodyLayout">
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>Value</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="bodyValue"/>
-           </item>
-           <item row="0" column="4">
-            <widget class="QPushButton" name="addBodyButton">
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="text">
-              <string>Add</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="bodyKey"/>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>Key</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="tab_2">
-          <attribute name="title">
-           <string notr="true">Headers</string>
-          </attribute>
-          <layout class="QGridLayout" name="requestHeadersLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_8">
-             <property name="text">
-              <string>Key</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="headersKey"/>
-           </item>
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="headersValue"/>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>Value</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="4">
-            <widget class="QPushButton" name="addHeadersButton">
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="text">
-              <string>Add</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="tab_3">
-          <attribute name="title">
-           <string notr="true">Cookies</string>
-          </attribute>
-          <layout class="QGridLayout" name="requestCookiesLayout">
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="cookiesValue"/>
-           </item>
-           <item row="0" column="4">
-            <widget class="QPushButton" name="addCookiesButton">
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="text">
-              <string>Add</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_9">
-             <property name="text">
-              <string>Value</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_10">
-             <property name="text">
-              <string>Key</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="cookiesKey"/>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="tab_10">
-          <attribute name="title">
-           <string notr="true">Parameters</string>
-          </attribute>
-          <layout class="QGridLayout" name="requestParametersLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>Key</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="parametersKey"/>
-           </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>Value</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="3">
-            <widget class="QLineEdit" name="parametersValue"/>
-           </item>
-           <item row="0" column="4">
-            <widget class="QPushButton" name="addParametersButton">
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically add parameter to the url&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-             <property name="text">
-              <string>Add</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-       <item row="1" column="3">
-        <widget class="QComboBox" name="requestMethod">
-         <item>
-          <property name="text">
-           <string>GET</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>POST</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>PUT</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>DELETE</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QComboBox" name="requestScheme">
-         <property name="toolTip">
-          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use this scheme, if one is not found in the url&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-         </property>
-         <item>
-          <property name="text">
-           <string>HTTPS</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>HTTP</string>
-          </property>
-         </item>
-        </widget>
+     <widget class="QWidget" name="widget_3" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <layout class="QVBoxLayout" name="sidebarLayout">
+       <item>
+        <widget class="QListWidget" name="historyList"/>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="widget_2" native="true">
-      <layout class="QGridLayout" name="gridLayout">
+     <widget class="QWidget" name="widget_7" native="true">
+      <layout class="QGridLayout" name="gridLayout_6">
        <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Response</string>
+        <widget class="QSplitter" name="splitter">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLabel" name="responseStatus">
-         <property name="text">
-          <string>Status:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="responseTime">
-         <property name="text">
-          <string>Time:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="3">
-        <widget class="QLabel" name="responseSize">
-         <property name="text">
-          <string>Size:</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" colspan="4">
-        <widget class="QTabWidget" name="tabWidget_2">
-         <property name="currentIndex">
-          <number>0</number>
-         </property>
-         <widget class="QWidget" name="tab_4">
-          <attribute name="title">
-           <string notr="true">Body</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QTabWidget" name="tabWidget_3">
-             <property name="toolTip">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Render website with QtWebEngine&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <widget class="QWidget" name="widget" native="true">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="1" column="2">
+            <widget class="QLineEdit" name="requestUrl"/>
+           </item>
+           <item row="1" column="4">
+            <widget class="QPushButton" name="sendButton">
+             <property name="text">
+              <string>SEND</string>
              </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="label_2">
+             <property name="text">
+              <string>Request</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="5">
+            <widget class="QTabWidget" name="tabWidget">
              <property name="currentIndex">
               <number>0</number>
              </property>
-             <widget class="QWidget" name="tab_7">
+             <widget class="QWidget" name="tab">
               <attribute name="title">
-               <string notr="true">Pretty</string>
+               <string notr="true">Body</string>
               </attribute>
-              <layout class="QVBoxLayout" name="responseBodyPrettyLayout">
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
+              <layout class="QGridLayout" name="requestBodyLayout">
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Value</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="bodyValue"/>
+               </item>
+               <item row="0" column="4">
+                <widget class="QPushButton" name="addBodyButton">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Add</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="bodyKey"/>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>Key</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="tab_8">
+             <widget class="QWidget" name="tab_2">
               <attribute name="title">
-               <string notr="true">Raw</string>
+               <string notr="true">Headers</string>
               </attribute>
-              <layout class="QVBoxLayout" name="responseBodyRawLayout">
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
+              <layout class="QGridLayout" name="requestHeadersLayout">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>Key</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="headersKey"/>
+               </item>
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="headersValue"/>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>Value</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="4">
+                <widget class="QPushButton" name="addHeadersButton">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Add</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
-             <widget class="QWidget" name="tab_9">
+             <widget class="QWidget" name="tab_3">
               <attribute name="title">
-               <string notr="true">Web view</string>
+               <string notr="true">Cookies</string>
               </attribute>
-              <layout class="QVBoxLayout" name="responseBodyWebLayout">
-               <property name="leftMargin">
-                <number>0</number>
-               </property>
-               <property name="topMargin">
-                <number>0</number>
-               </property>
-               <property name="rightMargin">
-                <number>0</number>
-               </property>
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
+              <layout class="QGridLayout" name="requestCookiesLayout">
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="cookiesValue"/>
+               </item>
+               <item row="0" column="4">
+                <widget class="QPushButton" name="addCookiesButton">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically format key, value pair to json&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Add</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>Value</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_10">
+                 <property name="text">
+                  <string>Key</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="cookiesKey"/>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_10">
+              <attribute name="title">
+               <string notr="true">Parameters</string>
+              </attribute>
+              <layout class="QGridLayout" name="requestParametersLayout">
+               <item row="0" column="0">
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Key</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="1">
+                <widget class="QLineEdit" name="parametersKey"/>
+               </item>
+               <item row="0" column="2">
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>Value</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="0" column="3">
+                <widget class="QLineEdit" name="parametersValue"/>
+               </item>
+               <item row="0" column="4">
+                <widget class="QPushButton" name="addParametersButton">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Automatically add parameter to the url&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="text">
+                  <string>Add</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </widget>
             </widget>
            </item>
+           <item row="1" column="3">
+            <widget class="QComboBox" name="requestMethod">
+             <item>
+              <property name="text">
+               <string>GET</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>POST</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PUT</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>DELETE</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="requestScheme">
+             <property name="toolTip">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Use this scheme, if one is not found in the url&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>HTTPS</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>HTTP</string>
+              </property>
+             </item>
+            </widget>
+           </item>
           </layout>
          </widget>
-         <widget class="QWidget" name="tab_5">
-          <attribute name="title">
-           <string notr="true">Headers</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="responseHeadersLayout"/>
-         </widget>
-         <widget class="QWidget" name="tab_6">
-          <attribute name="title">
-           <string notr="true">Cookies</string>
-          </attribute>
-          <layout class="QVBoxLayout" name="responseCookiesLayout"/>
+         <widget class="QWidget" name="widget_2" native="true">
+          <layout class="QGridLayout" name="gridLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string>Response</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="responseStatus">
+             <property name="text">
+              <string>Status:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="responseTime">
+             <property name="text">
+              <string>Time:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLabel" name="responseSize">
+             <property name="text">
+              <string>Size:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0" colspan="4">
+            <widget class="QTabWidget" name="tabWidget_2">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="tab_4">
+              <attribute name="title">
+               <string notr="true">Body</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QTabWidget" name="tabWidget_3">
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Render website with QtWebEngine&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="currentIndex">
+                  <number>0</number>
+                 </property>
+                 <widget class="QWidget" name="tab_7">
+                  <attribute name="title">
+                   <string notr="true">Pretty</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="responseBodyPrettyLayout">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="tab_8">
+                  <attribute name="title">
+                   <string notr="true">Raw</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="responseBodyRawLayout">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                  </layout>
+                 </widget>
+                 <widget class="QWidget" name="tab_9">
+                  <attribute name="title">
+                   <string notr="true">Web view</string>
+                  </attribute>
+                  <layout class="QVBoxLayout" name="responseBodyWebLayout">
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="bottomMargin">
+                    <number>0</number>
+                   </property>
+                  </layout>
+                 </widget>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="tab_5">
+              <attribute name="title">
+               <string notr="true">Headers</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="responseHeadersLayout"/>
+             </widget>
+             <widget class="QWidget" name="tab_6">
+              <attribute name="title">
+               <string notr="true">Cookies</string>
+              </attribute>
+              <layout class="QVBoxLayout" name="responseCookiesLayout"/>
+             </widget>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </widget>
        </item>

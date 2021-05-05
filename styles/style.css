@@ -119,3 +119,13 @@ QTabWidget,
 QTabBar {
   border: none;
 }
+
+#historyItem {
+  margin: 5px 0;
+
+  background-color: rgb(43, 50, 65);
+}
+
+#historyList {
+  margin-right: 5px;
+}

@@ -1,9 +1,6 @@
 import re
 import sys
-import json
 import requests
-from requests.exceptions import RequestException
-from requests.structures import CaseInsensitiveDict
 
 from PyQt5 import QtWidgets as qtw
 from PyQt5 import QtCore as qtc
@@ -22,7 +19,23 @@ class MainWidget(qtw.QWidget):
         super().__init__(*args, **kwargs)
         uic.loadUi('./ui/app.ui', self)
         self.setWindowTitle('Pyman')
+        self.setupUi()
 
+        # Load stylesheet after adding extra widgets
+        self.setStyleSheet(utils.load_stylesheet('./styles/style.css'))
+
+        # Signals
+        self.sendButton.clicked.connect(self.send)
+
+        self.addBodyButton.clicked.connect(self.add_body_item)
+        self.addHeadersButton.clicked.connect(self.add_headers_item)
+        self.addCookiesButton.clicked.connect(self.add_cookies_item)
+        self.addParametersButton.clicked.connect(self.add_parameters_item)
+
+        self.historyList.itemClicked.connect(
+            self.display_request_from_history)
+
+    def setupUi(self):
         self.requestBody = widgets.ZoomableTextEdit()
         self.requestBody.setObjectName('requestBody')
         self.requestBodyLayout.addWidget(self.requestBody, 1, 0, 2, 5)
@@ -49,17 +62,6 @@ class MainWidget(qtw.QWidget):
         # Web view not available in qt designer
         self.responseBodyWebView = QtWebEngineWidgets.QWebEngineView()
         self.responseBodyWebLayout.addWidget(self.responseBodyWebView)
-
-        # Load stylesheet after adding extra widgets
-        self.setStyleSheet(utils.load_stylesheet('./styles/style.css'))
-
-        # Signals
-        self.sendButton.clicked.connect(self.send)
-
-        self.addBodyButton.clicked.connect(self.add_body_item)
-        self.addHeadersButton.clicked.connect(self.add_headers_item)
-        self.addCookiesButton.clicked.connect(self.add_cookies_item)
-        self.addParametersButton.clicked.connect(self.add_parameters_item)
 
     def add_body_item(self):
         key = self.bodyKey.text()
@@ -102,20 +104,13 @@ class MainWidget(qtw.QWidget):
 
         self.requestUrl.setText(f'{url}/?{"&".join(params_list)}')
 
-    def reset_request(self):
-        self.requestBody.setPlainText('')
-        self.requestHeaders.setPlainText('')
-        self.requestCookies.setPlainText('')
-        self.requestParameters.setPlainText('')
-
-    def reset_response(self):
-        self.responseBodyPretty.setPlainText('')
-        self.responseBodyRaw.setPlainText('')
-        self.responseBodyWebView.setHtml('')
-        self.responseHeaders.setPlainText('')
-        self.responseCookies.setPlainText('')
-
     def parse_request(self):
+        method = self.requestMethod.currentText()
+
+        url = self.requestUrl.text().strip()
+        if not re.match(r'^https?:\/\/', url):
+            url = f'{self.requestScheme.currentText().lower()}://{url}'
+
         body = self.requestBody.toPlainText()
         body = utils.json_to_python(body)
 
@@ -132,12 +127,9 @@ class MainWidget(qtw.QWidget):
         params = self.requestParameters.toPlainText()
         params = utils.json_to_python(params)
 
-        return body, headers, cookies, params
+        return method, url, body, headers, cookies, params
 
     def request(self, method, url, body, headers, cookies, params):
-        if not re.match(r'^https?:\/\/', url):
-            url = f'{self.requestScheme.currentText().lower()}://{url}'
-
         try:
             if method == "POST":
                 r = requests.post(url, json=body, headers=headers,
@@ -158,42 +150,64 @@ class MainWidget(qtw.QWidget):
         return r
 
     def send(self):
-        method = self.requestMethod.currentText()
-        url = self.requestUrl.text()
-        body, headers, cookies, params = self.parse_request()
+        method, url, body, headers, cookies, params = self.parse_request()
+        r = self.request(method, url, body, headers, cookies, params)
 
-        self.reset_response()
-        response = self.request(method, url, body, headers, cookies, params)
+        self.clear_response_fields()
 
         # Show exception in response field
-        if issubclass(type(response), Exception):
-            self.responseStatus.setText(f'Status: {type(response).__name__}')
-            self.responseBodyPretty.setPlainText(str(response))
-            self.responseBodyRaw.setPlainText(str(response))
+        if issubclass(type(r), Exception):
+            self.display_response(type(r).__name__, body=str(r))
             return
 
-        self.responseStatus.setText(f'Status: {response.status_code}')
-        self.responseTime.setText(
-            f'Time: {response.elapsed.total_seconds() * 1000:.0f} ms')
-        self.responseSize.setText(
-            f'Size: {len(response.content) / 1024:.2f} kB')
+        history_item = widgets.RequestHistoryItem(
+            method, url, body, headers, cookies, params, r)
+        self.historyList.addItem(history_item)
+        self.historyList.setItemWidget(history_item, history_item.widget)
+
+        self.display_response(r.status_code, r.elapsed.total_seconds(), len(
+            r.content), r.text, dict(r.headers), dict(r.cookies))
+
+    def display_response(self, status: str = '', time_in_seconds: int = 0, size_in_bytes: int = 0, body: str = '', headers: dict = {}, cookies: dict = {}):
+        self.responseStatus.setText(f'Status: {status}')
+        self.responseTime.setText(f'Time: {time_in_seconds * 1000:.0f} ms')
+        self.responseSize.setText(f'Size: {size_in_bytes / 1024:.2f} kB')
 
         # Format html or json body
-        if re.match(r'^{.*}$|^\[.*\]$', response.text):
-            self.responseBodyPretty.setPlainText(
-                utils.format_json(response.text))
+        if utils.is_json(body):
+            self.responseBodyPretty.setPlainText(utils.format_json(body))
         else:
-            response_html = BeautifulSoup(response.text, 'html.parser')
+            response_html = BeautifulSoup(body, 'html.parser')
             self.responseBodyPretty.setPlainText(response_html.prettify())
 
-        self.responseBodyRaw.setPlainText(response.text)
-        self.responseBodyWebView.setHtml(response.text)
+        self.responseBodyRaw.setPlainText(body)
+        self.responseBodyWebView.setHtml(body)
 
-        # headers and cookies return Case insensitive dict
-        self.responseHeaders.setPlainText(
-            utils.python_to_json(dict(response.headers)))
-        self.responseCookies.setPlainText(
-            utils.python_to_json(dict(response.cookies)))
+        self.responseHeaders.setPlainText(utils.python_to_json(headers))
+        self.responseCookies.setPlainText(utils.python_to_json(cookies))
+
+    def display_request_from_history(self, request_history_item):
+        self.requestBody.setPlainText(request_history_item.body)
+        self.requestHeaders.setPlainText(request_history_item.headers)
+        self.requestCookies.setPlainText(request_history_item.cookies)
+        self.requestParameters.setPlainText(request_history_item.params)
+
+        r = request_history_item.response
+        self.display_response(r.status_code, r.elapsed.total_seconds(), len(
+            r.content), r.text, dict(r.headers), dict(r.cookies))
+
+    def clear_request_fields(self):
+        self.requestBody.setPlainText('')
+        self.requestHeaders.setPlainText('')
+        self.requestCookies.setPlainText('')
+        self.requestParameters.setPlainText('')
+
+    def clear_response_fields(self):
+        self.responseBodyPretty.setPlainText('')
+        self.responseBodyRaw.setPlainText('')
+        self.responseBodyWebView.setHtml('')
+        self.responseHeaders.setPlainText('')
+        self.responseCookies.setPlainText('')
 
 
 if __name__ == '__main__':
